@@ -7,11 +7,6 @@ export class NavBar extends Component {
         icon: 'fab fa-github'
       }
     
-    static propTypes = {
-        title: this.propTypes.string.isRequired,
-        icon: PropTypes.string.isRequired
-    }
-    
     render() {
     return (
         <nav className='navbar bg-primary'>
