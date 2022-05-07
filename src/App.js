@@ -6,6 +6,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import About from './components/pages/About.js';
 
 class App extends Component {
 
@@ -50,6 +51,7 @@ class App extends Component {
                     <Users loading={ loading } users={ users }/>
                   </Fragment>
                 )} />
+                <Route exact path="/about" component={About} />
               </Switch>
             </div>
         </div>
