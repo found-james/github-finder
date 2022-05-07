@@ -1,9 +1,17 @@
 import { Component } from "react";
-
+import Spinner from "../layout/Spinner";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 export class User extends Component {
 
     componentDidMount () {
         this.props.getUser(this.props.match.params.login);
+    }
+
+    static propTypes = {
+        loading: PropTypes.bool,
+        user: PropTypes.object.isRequired,
+        getUser: PropTypes.func.isRequired
     }
 
     render () {
@@ -24,7 +32,17 @@ export class User extends Component {
 
         const { loading } = this.props;
 
-        return <div>  {login}</div>;
+        if (loading) return <Spinner />
+
+        return (
+            <>
+                <Link to="/" className="btn btn-kight">
+                    Back to search
+                </Link>
+                Hireable: { " " }
+                {!hireable ? <i className="fas fa-check text-sucess" /> : <i className="fas fa-times-circle text-danger" /> }
+            </>
+        )
     }
 };
 
