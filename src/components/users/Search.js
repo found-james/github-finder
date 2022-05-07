@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export class Search extends Component {
   state = {
-      text: '',
+      text: "",
   }
   
   static propTypes = {
@@ -15,11 +15,11 @@ export class Search extends Component {
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
   onSubmit = (e) => {
       e.preventDefault();
-        if (this.state.text === ''){
+        if (this.state.text === ""){
           this.props.setAlert("please enter something", "light");
         } else {
         this.props.searchUsers( this.state.text );
-        this.setState({ text: '' });
+        this.setState({ text: "" });
         }
     }
   
@@ -27,25 +27,23 @@ export class Search extends Component {
       const { showClear, clearUsers } = this.props;
     return (
       <div>
-        <form className='form' onSubmit={ this.onSubmit } >
-            <input type='text' 
-                   name='text' 
-                   placeholder='search users..' 
+        <form className="form" onSubmit={ this.onSubmit } >
+            <input type="text" 
+                   name="text" 
+                   placeholder="search users.." 
                    value={ this.state.text }
                    onChange={ this.onChange }
                    />
 
-          <input type='submit'
-                 value='search'
-                 className='btn btn-dark btn-block' />
+          <input type="submit"
+                 value="search"
+                 className="btn btn-dark btn-block" />
         </form>
-        { showClear && ( <button className='btn btn-light btn-block' 
-                                            onClick={ clearUsers }>clear</button>)
-        }
+        { showClear && (<button className="btn btn-light btn-block" onClick={ clearUsers }>clear</button>) }
       </div>
     )
   }
 }
 
-export default Search
+export default Search;
 

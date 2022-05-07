@@ -1,13 +1,13 @@
-import NavBar from './components/layout/NavBar.js';
-import Users from './components/users/Users.js';
-import User from './components/users/User.js';
-import Search from './components/users/Search.js';
-import  Alert from './components/layout/Alert.js';
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
-import './App.css';
-import About from './components/pages/About.js';
+import NavBar from "./components/layout/NavBar.js";
+import Users from "./components/users/Users.js";
+import User from "./components/users/User.js";
+import Search from "./components/users/Search.js";
+import  Alert from "./components/layout/Alert.js";
+import React, { Component, Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import axios from "axios";
+import "./App.css";
+import About from "./components/pages/About.js";
 
 class App extends Component {
 
@@ -69,11 +69,11 @@ class App extends Component {
     return(
       <Router>
         <div className="App">
-            <NavBar title='github finder'/>
-            <div className='container'>
+            <NavBar title="github finder"/>
+            <div className="container">
               <Alert alert={ this.state.alert } />
               <Switch>
-                <Route exact path='/' render={ props => (
+                <Route exact path="/" render={ props => (
                   <Fragment>
                     <Search searchUsers={ this.searchUsers } 
                             clearUsers={ this.clearUsers } 
