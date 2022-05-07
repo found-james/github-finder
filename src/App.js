@@ -1,5 +1,6 @@
 import NavBar from './components/layout/NavBar.js';
 import Users from './components/users/Users.js';
+import User from './components/users/User.js';
 import Search from './components/users/Search.js';
 import  Alert from './components/layout/Alert.js';
 import React, { Component, Fragment } from 'react';
@@ -30,8 +31,9 @@ class App extends Component {
     this.setState({ loading: true });
 
     const res = await axios.get(
-      `https://api.github.com/users/?${ username }?client_id=${ process.env.REACT_APP_GITHUB_CLIENT_ID }&client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_SECRET }`);
+      `https://api.github.com/users/${ username }?client_id=${ process.env.REACT_APP_GITHUB_CLIENT_ID }&client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_SECRET }`);
     
+      console.log(res.data);
     this.setState({ user: res.data, loading: false });
 
   }
@@ -45,7 +47,7 @@ class App extends Component {
 
   render () {
 
-    const { users, loading } = this.state;
+    const { users, user, loading } = this.state;
     return(
       <Router>
         <div className="App">
@@ -63,6 +65,9 @@ class App extends Component {
                   </Fragment>
                 )} />
                 <Route exact path="/about" component={About} />
+                <Route  path="/user/:login" render={ props => (
+                  <User {...props} getUser={this.getUser} user={user} loading= {loading}/>
+                )}/>
               </Switch>
             </div>
         </div>
