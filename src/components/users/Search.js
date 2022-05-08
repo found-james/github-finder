@@ -18,26 +18,20 @@ export class Search extends Component {
         if (this.state.text === ""){
           this.props.setAlert("please enter something", "light");
         } else {
-        this.props.searchUsers( this.state.text );
-        this.setState({ text: "" });
+          this.props.searchUsers( this.state.text );
+          this.setState({ text: "" });
         }
     }
   
     render() {
+      
       const { showClear, clearUsers } = this.props;
-    return (
+    
+      return (
       <div>
         <form className="form" onSubmit={ this.onSubmit } >
-            <input type="text" 
-                   name="text" 
-                   placeholder="search users.." 
-                   value={ this.state.text }
-                   onChange={ this.onChange }
-                   />
-
-          <input type="submit"
-                 value="search"
-                 className="btn btn-dark btn-block" />
+          <input type="text" name="text" placeholder="search users.." value={ this.state.text } onChange={ this.onChange } />
+          <input type="submit" value="search" className="btn btn-dark btn-block" />
         </form>
         { showClear && (<button className="btn btn-light btn-block" onClick={ clearUsers }>clear</button>) }
       </div>
