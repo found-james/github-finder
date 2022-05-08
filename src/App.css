@@ -48,6 +48,12 @@ img {
   padding: 0 2rem;
 }
 
+.users-styles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem; 
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
