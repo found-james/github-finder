@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Alert = ({ alert }) => {
   return (
@@ -11,4 +10,4 @@ const Alert = ({ alert }) => {
     )
 };
 
-export default Alert
+export default Alert;
