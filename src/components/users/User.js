@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import  Repos  from "../repos/Repos";
 
-export default function User ({ user, loading, getUser, getUserRepos, repos, match}){
+export default function User ({ user, loading, getUser, getUserRepos, repos, match }){
 
     useEffect (() => {
         getUser(match.params.login);

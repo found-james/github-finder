@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavBar from "./components/layout/NavBar.js";
@@ -13,23 +13,22 @@ import About from "./components/pages/About.js";
 import "./App.css";
 
 import { userApi, usersApi, reposApi } from "./utilities/fetch.js";
-class App extends Component {
 
-  state = {
-    users: [],
-    user: {},
-    loading: false,
-    alert: null,
-    repo: []
-  };
+export default function App () {
 
-  searchUsers = async text => {
-    
-    this.setState({ loading: true });
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const [repos, setRepos] = useState([]);
+
+  const searchUsers = async text => {    
+    setLoading( true );
     
     try { 
-      const res = await usersApi (text);
-      this.setState({ users: res.data.items, loading: false });
+      const res = await usersApi ( text );
+      setUsers( res.data.items ); 
+      setLoading ( false );
     
     } catch (err) {
       console.log(err);
@@ -37,24 +36,26 @@ class App extends Component {
 
   }
 
-  getUser = async (username) => {
-    this.setState({ loading: true });
+  const getUser = async (username) => {
+    setLoading ( true );
 
     try {
       const res = await userApi (username);
-      this.setState({ user: res.data, loading: false });
+      setUser ( res.data ) 
+      setLoading( false );
 
     } catch (err) {
       console.log(err);
     }
   }
 
-  getUserRepos = async (username) => {
-    this.setState({ loading: true });
+  const getUserRepos = async (username) => {
+    setLoading ( true );
 
     try {
       const res = await reposApi ();
-      this.setState({ repos: res.data, loading: false });
+      setRepos ( res.data ); 
+      setLoading( false );
       console.log(res);
   
     } catch (err) {
@@ -63,36 +64,32 @@ class App extends Component {
 
   }
 
-  clearUsers = () => this.setState({ users: [], loading: false });
+  const clearUsers = () =>{ setUsers([]); setLoading(false);}
 
-  setAlert = (msg, type) => {
-    this.setState({ alert: { msg, type }});
-    setTimeout(() => this.setState({ alert: null }), 5000);
+  const showAlert = (msg, type) => {
+    setAlert({ msg, type });
+    setTimeout(() => setAlert(null), 5000);
   }
 
-  render () {
-
-    const { users, user, loading, repos } = this.state;
-    
     return(
       <Router>
         <div className="App">
             <NavBar title="github finder"/>
 
             <div className="container">
-              <Alert alert={ this.state.alert } />
+              <Alert alert={ alert } />
               <Switch>
                 
                 <Route exact path="/" render={ props => (
                   <>
-                    <Search searchUsers={ this.searchUsers } clearUsers={ this.clearUsers } showClear={ users.length > 0 ? true : false } setAlert={ this.setAlert }/>
+                    <Search searchUsers={ searchUsers } clearUsers={ clearUsers } showClear={ users.length > 0 ? true : false } setAlert={ showAlert }/>
                     <Users loading={ loading } users={ users }/>
                   </>
                 )} />
 
                 <Route exact path="/about" component={About} />
                 <Route  path="/user/:login" render={ props => (
-                  <User {...props} getUser={this.getUser} getUserRepos={ this.getUserRepos } repos={ repos } user={user} loading= {loading}/>
+                  <User {...props} getUser={getUser} getUserRepos={ getUserRepos } repos={ repos } user={user} loading= {loading}/>
                 )}/>
 
               </Switch>
@@ -100,10 +97,8 @@ class App extends Component {
         </div>
       </Router>
     );
-  }
-}
-
-export default App;
+  
+};
 
 // async componentDidMount() {
   //   this.setState({ loading: true });
