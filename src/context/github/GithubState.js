@@ -52,12 +52,31 @@ const GithubState = props => {
           console.log(err);
         }
       }
+
+    
+  const getUserRepos = async (username) => {
+    setLoading();
+
+    try {
+      const res = await reposApi ();
+      dispatch({
+        type: GET_REPOS,
+        payload: res.data
+      });
+  
+      console.log("@ getUserRepos", res);
+  
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
     const clearUsers = () => dispatch({ type: CLEAR_USERS });
 
 
     const setLoading = () => dispatch({ type: SET_LOADING });
 
-    return <GithubContext.Provider value={{ users: state.users, user: state.user, repos: state.repos, loading: state.loading, searchUsers, clearUsers, getUser }}>
+    return <GithubContext.Provider value={{ users: state.users, user: state.user, repos: state.repos, loading: state.loading, searchUsers, clearUsers, getUser, getUserRepos }}>
         {props.children}
 
     </GithubContext.Provider>

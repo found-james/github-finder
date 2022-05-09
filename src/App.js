@@ -14,32 +14,10 @@ import About from "./components/pages/About.js";
 import GithubState from "./context/github/GithubState.js";
 import "./App.css";
 
-import { userApi, usersApi, reposApi } from "./utilities/fetch.js";
-
-
 export default function App () {
 
   
-  const [alert, setAlert] = useState(null);
-  const [repos, setRepos] = useState([]);
-
- 
-
-
-  const getUserRepos = async (username) => {
-  
-
-    try {
-      const res = await reposApi ();
-      setRepos ( res.data ); 
-  
-      console.log(res);
-  
-    } catch (err) {
-      console.log(err);
-    }
-
-  }
+  const [alert, setAlert] = useState(null); 
 
   const showAlert = (msg, type) => {
     setAlert({ msg, type });
@@ -64,9 +42,8 @@ export default function App () {
                   )} />
   
                   <Route exact path="/about" component={About} />
-                  <Route  path="/user/:login" render={ props => (
-                    <User {...props} getUserRepos={ getUserRepos } repos={ repos } />
-                  )}/>
+                  <Route  path="/user/:login" component={User}
+                  />
   
                 </Switch>
               </div>
