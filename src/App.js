@@ -19,33 +19,20 @@ import { userApi, usersApi, reposApi } from "./utilities/fetch.js";
 
 export default function App () {
 
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  
   const [alert, setAlert] = useState(null);
   const [repos, setRepos] = useState([]);
 
-  const getUser = async (username) => {
-    setLoading ( true );
-
-    try {
-      const res = await userApi (username);
-      setUser ( res.data ) 
-      setLoading( false );
-
-    } catch (err) {
-      console.log(err);
-    }
-  }
+ 
 
 
   const getUserRepos = async (username) => {
-    setLoading ( true );
+  
 
     try {
       const res = await reposApi ();
       setRepos ( res.data ); 
-      setLoading( false );
+  
       console.log(res);
   
     } catch (err) {
@@ -78,7 +65,7 @@ export default function App () {
   
                   <Route exact path="/about" component={About} />
                   <Route  path="/user/:login" render={ props => (
-                    <User {...props} getUser={getUser} getUserRepos={ getUserRepos } repos={ repos } user={user} loading= {loading}/>
+                    <User {...props} getUserRepos={ getUserRepos } repos={ repos } />
                   )}/>
   
                 </Switch>

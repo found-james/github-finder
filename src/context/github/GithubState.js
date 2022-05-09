@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-import axios from "axios";
 import GithubContext from "./githubContext.js";
 import GithubReducer from "./githubReducer.js";
 import { userApi, usersApi, reposApi } from "../../utilities/fetch.js";
@@ -9,7 +8,7 @@ import {
     SET_LOADING,
     CLEAR_USERS,
     GET_REPOS,
-    GET_USERS
+    GET_USER
 } from "../types";
 
 const GithubState = props => {
@@ -38,12 +37,27 @@ const GithubState = props => {
         }
     }
 
-  const clearUsers = () => dispatch({ type: CLEAR_USERS });
+    const getUser = async (username) => {
+        setLoading ();
+    
+        try {
+          const res = await userApi (username);
+          console.log(res)
+          dispatch({
+              type: GET_USER,
+              payload: res.data
+          })
+    
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    const clearUsers = () => dispatch({ type: CLEAR_USERS });
 
 
     const setLoading = () => dispatch({ type: SET_LOADING });
 
-    return <GithubContext.Provider value={{ users: state.users, user: state.user, repos: state.repos, loading: state.loading, searchUsers, clearUsers}}>
+    return <GithubContext.Provider value={{ users: state.users, user: state.user, repos: state.repos, loading: state.loading, searchUsers, clearUsers, getUser }}>
         {props.children}
 
     </GithubContext.Provider>

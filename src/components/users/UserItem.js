@@ -1,8 +1,11 @@
-import React, { Component } from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import GithubContext from "../../context/github/githubContext";
 
 const UserItem = ({ user: { login, avatar_url, html_url }}) => {
+    
+
         return (
           <div className="card text-center">
               <img src={avatar_url} 
