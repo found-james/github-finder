@@ -24,14 +24,14 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlert }) => {
         { showClear && (<button className="btn btn-light btn-block" onClick={ clearUsers }>clear</button>) }
       </div>
     )
-
-    Search.propTypes = {
-      searchUsers: PropTypes.func.isRequired,
-      clearUsers: PropTypes.func.isRequired,
-      setAlert: PropTypes.func.isRequired
-    }
+   
   }
-
+  
+  Search.propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired
+  }
 
 export default Search;
 
