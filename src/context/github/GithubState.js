@@ -2,6 +2,8 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import GithubContext from "./githubContext.js";
 import GithubReducer from "./githubReducer.js";
+import { userApi, usersApi, reposApi } from "../../utilities/fetch.js";
+
 import {
     SEARCH_USERS,
     SET_LOADING,
@@ -17,9 +19,29 @@ const GithubState = props => {
         repos: [],
         loading: false
     }
+    
     const [state, dispatch] = useReducer(GithubReducer, initialState);
 
-    return <GithubContext.Provider value={{ users: state.users, user: state.user, repos: state.repos, loading: state.loading}}>
+    const searchUsers = async text => {    
+        setLoading();
+        
+        try { 
+
+          const res = await usersApi ( text );
+          dispatch({ 
+              type: SEARCH_USERS,
+              payload: res.data.items
+          });
+        
+        } catch (err) {
+          console.log(err);
+        }
+    }
+
+
+    const setLoading = () => dispatch({ type: SET_LOADING });
+
+    return <GithubContext.Provider value={{ users: state.users, user: state.user, repos: state.repos, loading: state.loading, searchUsers}}>
         {props.children}
 
     </GithubContext.Provider>

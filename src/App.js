@@ -25,23 +25,6 @@ export default function App () {
   const [alert, setAlert] = useState(null);
   const [repos, setRepos] = useState([]);
 
-  const searchUsers = async text => {    
-    setLoading( true );
-    
-    try { 
-      const res = await usersApi ( text );
-      setUsers( res.data.items ); 
-      setLoading ( false );
-    
-    } catch (err) {
-      console.log(err);
-    }
-
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   const getUser = async (username) => {
     setLoading ( true );
 
@@ -89,7 +72,7 @@ export default function App () {
                   
                   <Route exact path="/" render={ props => (
                     <>
-                      <Search searchUsers={ searchUsers } clearUsers={ clearUsers } showClear={ users.length > 0 ? true : false } setAlert={ showAlert }/>
+                      <Search clearUsers={ clearUsers } showClear={ users.length > 0 ? true : false } setAlert={ showAlert }/>
                       <Users loading={ loading } users={ users }/>
                     </>
                   )} />
