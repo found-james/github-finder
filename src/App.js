@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -14,6 +15,7 @@ import GithubState from "./context/github/GithubState.js";
 import "./App.css";
 
 import { userApi, usersApi, reposApi } from "./utilities/fetch.js";
+
 
 export default function App () {
 
@@ -35,6 +37,9 @@ export default function App () {
       console.log(err);
     }
 
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const getUser = async (username) => {
@@ -49,6 +54,7 @@ export default function App () {
       console.log(err);
     }
   }
+
 
   const getUserRepos = async (username) => {
     setLoading ( true );
@@ -65,8 +71,7 @@ export default function App () {
 
   }
 
-  const clearUsers = () =>{ setUsers([]); setLoading(false);}
-
+  const clearUsers = () =>{ setUsers([]); setLoading(false); }
   const showAlert = (msg, type) => {
     setAlert({ msg, type });
     setTimeout(() => setAlert(null), 5000);

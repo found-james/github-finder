@@ -19,6 +19,7 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlert }) => {
       <div>
         <form className="form" onSubmit={ onSubmit } >
           <input type="text" name="text" placeholder="search users.." value={ text } onChange={ onChange } />
+
           <input type="submit" value="search" className="btn btn-dark btn-block" />
         </form>
         { showClear && (<button className="btn btn-light btn-block" onClick={ clearUsers }>clear</button>) }
