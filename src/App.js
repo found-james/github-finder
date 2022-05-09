@@ -37,9 +37,6 @@ export default function App () {
       console.log(err);
     }
 
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   const getUser = async (username) => {
