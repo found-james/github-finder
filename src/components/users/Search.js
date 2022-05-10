@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
-
 import GithubContext from "../../context/github/githubContext";
 import AlertContext from "../../context/alert/alertContext";
 
@@ -35,10 +33,6 @@ const Search = ( ) => {
    
   }
   
-  Search.propTypes = {
-    
-    setAlert: PropTypes.func.isRequired
-  }
 
 export default Search;
 
